@@ -93,7 +93,7 @@ public class MainGameScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentScore.text = DiceManager.Instance.CalculateScore().ToString();
+        currentScore.text = DiceManager.Instance.GetScore().ToString();
     }
     private void HideFarkle()
     {

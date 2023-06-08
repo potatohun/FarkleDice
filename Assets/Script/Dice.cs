@@ -12,6 +12,7 @@ public class Dice : MonoBehaviour, IPointerClickHandler
     private int number;
     private bool isSelect;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,8 @@ public class Dice : MonoBehaviour, IPointerClickHandler
             rectTransform.localScale = new Vector3(1.5f, 1.5f, 1f);
             DiceManager.Instance.SelectDice(clickedObject.GetComponent<Dice>());
         }
+
+        DiceManager.Instance.CalculateScore();
     }
     public void Roll()
     {
@@ -80,4 +83,6 @@ public class Dice : MonoBehaviour, IPointerClickHandler
     {
         this.isSelect = false;
     }
+
+
 }
