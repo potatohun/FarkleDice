@@ -153,49 +153,7 @@ public class DiceManager : MonoBehaviour
                 this.score = 0;
                 break;
         }
-        Debug.Log(score);
-        //Nothing => 0점
-        //OneorFive(1),(5) 
-        //ThreeN(222),(333),(444),(555),(666)
-        //FourN(2222),(3333),(4444),(5555),(6666)
-        //FiveN(22222),(33333),(44444),(55555),(66666)
-
-        //ThreeOne(111) => 1000점
-        //FourOne(1111) => 2000점
-        //FiveOne(11111) => 4000점
-
-        //OneToFive(12345) => 500점
-        //TwoToSix(23456) => 750점
-        //OneToSix(123456) => 1500점
-        //Dictionary<int, int> selectedDiceCounts = new Dictionary<int, int>();
-
-        //// 선택된 주사위의 각 면의 개수를 카운트
-        //foreach (Dice dice in selectedDice)
-        //{
-        //    int faceValue = dice.GetNumber();
-        //    if (selectedDiceCounts.ContainsKey(faceValue))
-        //    {
-        //        selectedDiceCounts[faceValue]++;
-        //    }
-        //    else
-        //    {
-        //        selectedDiceCounts.Add(faceValue, 1);
-        //    }
-        //}
-
-        //// Farkle Dice 족보에 따라 점수 계산
-        //foreach (var kvp in selectedDiceCounts)
-        //{
-        //    int faceValue = kvp.Key;
-        //    int count = kvp.Value;
-
-        //    if (farkleDiceScoring.ContainsKey(faceValue))
-        //    {
-        //        // 주사위 면이 Farkle Dice 족보에 포함되면 해당 점수를 계산하여 더함
-        //        int faceScore = farkleDiceScoring[faceValue];
-        //        score += faceScore * count;
-        //    }
-        //}
+        Debug.Log(str);
 
         return score;
     }
@@ -207,6 +165,7 @@ public class DiceManager : MonoBehaviour
         {
             RectTransform rectTransform = dice[i].GetComponent<RectTransform>();
             rectTransform.localScale = new Vector3(1f, 1f, 1f);
+            //dice[i].Roll();
             dice[i].SetSelected();
         }
     }

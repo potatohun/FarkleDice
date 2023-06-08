@@ -31,13 +31,14 @@ public class MainGameScene : MonoBehaviour
         rollbutton.gameObject.SetActive(false);
         earnbutton.gameObject.SetActive(true);
         stopbutton.gameObject.SetActive(false);
+        DiceManager.Instance.SetScore(0);
     }
 
     public void OnStopButtonClick()
     {
         finalScore.text = (Convert.ToInt32(finalScore.text) + Convert.ToInt32(saveScore.text)).ToString();
         saveScore.text = "0";
-        currentScore.text = "0";
+        DiceManager.Instance.SetScore(0);
         DiceManager.Instance.AllActive();
         audioSource.PlayOneShot(audioclip);
         for (int i = 0; i < 6; i++)
@@ -59,10 +60,9 @@ public class MainGameScene : MonoBehaviour
             Invoke("HideFarkle", 1f);
             DiceManager.Instance.AllActive();
             UpdateTurn();
-            //for (int i = 0; i < DiceManager.Instance.dice.Length; i++)
-            //{
-            //    DiceManager.Instance.dice[i].gameObject.SetActive(true);
-            //}
+            DiceManager.Instance.SetScore(0);
+            DiceManager.Instance.InitDice();
+            stopbutton.gameObject.SetActive(true);
         }
         else
         {
@@ -74,14 +74,19 @@ public class MainGameScene : MonoBehaviour
             if (!DiceManager.Instance.IsSomethingActive())
             {
                 DiceManager.Instance.AllActive();
+                for(int j = 0; j < 6; j++)
+                {
+                    DiceManager.Instance.dice[j].Roll();
+                }
                 Debug.Log("전부 다시 활성화!");
             }
-            
+            DiceManager.Instance.SetScore(0);
+            DiceManager.Instance.InitDice();
+            rollbutton.gameObject.SetActive(true);
+            stopbutton.gameObject.SetActive(true);
         }
-        DiceManager.Instance.InitDice();
-        rollbutton.gameObject.SetActive(true);
-        earnbutton.gameObject.SetActive(false);
-        stopbutton.gameObject.SetActive(true);
+
+        
     }
     void Start()
     {

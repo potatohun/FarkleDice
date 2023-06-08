@@ -9,7 +9,7 @@ public class Dice : MonoBehaviour, IPointerClickHandler
     private Animator animator;
     public Sprite[] diceImage;
     private Image image;
-    private int number;
+    public int number;
     private bool isSelect;
 
 

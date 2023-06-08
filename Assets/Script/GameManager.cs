@@ -28,12 +28,6 @@ public class GameManager : MonoBehaviour
         turn = 1;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetPlayerName(string player_name)
     {
         this.player_name = player_name;
