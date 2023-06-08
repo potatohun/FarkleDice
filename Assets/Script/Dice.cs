@@ -35,13 +35,14 @@ public class Dice : MonoBehaviour, IPointerClickHandler
             isSelect = false;
             Debug.Log(this.number + "º±≈√«ÿ¡¶µ ");
             rectTransform.localScale = new Vector3(1f, 1f, 1f);
-
+            DiceManager.Instance.DeselectDice(clickedObject.GetComponent<Dice>());
         }
         else
         {
             isSelect = true;
             Debug.Log(this.number + "º±≈√µ ");
             rectTransform.localScale = new Vector3(1.5f, 1.5f, 1f);
+            DiceManager.Instance.SelectDice(clickedObject.GetComponent<Dice>());
         }
     }
     public void Roll()
@@ -73,5 +74,10 @@ public class Dice : MonoBehaviour, IPointerClickHandler
     public bool GetSelected()
     {
         return this.isSelect;
+    }
+
+    public void SetSelected()
+    {
+        this.isSelect = false;
     }
 }
