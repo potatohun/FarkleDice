@@ -208,4 +208,12 @@ public class DiceManager : MonoBehaviour
     {
         this.score = score;
     }
+
+    public void AllRoll()
+    {
+        for(int i = 0; i < dice.Length; i++)
+        {
+            dice[i].Roll();
+        }
+    }
 }

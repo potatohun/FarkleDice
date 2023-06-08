@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class MainGameScene : MonoBehaviour
 {
     public AudioSource audioSource;
-    public AudioClip audioclip;
+    public AudioClip audioclip1;
+    public AudioClip audioclip2;
     public Text nameText;
     public Button rollbutton;
     public Button earnbutton;
@@ -23,7 +24,7 @@ public class MainGameScene : MonoBehaviour
     // Start is called before the first frame update
     public void OnRollButtonClick()
     {
-        audioSource.PlayOneShot(audioclip);
+        audioSource.PlayOneShot(audioclip1);
         for(int i = 0; i < 6; i++)
         {
             DiceManager.Instance.dice[i].Roll();
@@ -40,11 +41,8 @@ public class MainGameScene : MonoBehaviour
         saveScore.text = "0";
         DiceManager.Instance.SetScore(0);
         DiceManager.Instance.AllActive();
-        audioSource.PlayOneShot(audioclip);
-        for (int i = 0; i < 6; i++)
-        {
-            DiceManager.Instance.dice[i].Roll();
-        }
+        audioSource.PlayOneShot(audioclip1);
+        DiceManager.Instance.AllRoll();
         rollbutton.gameObject.SetActive(false);
         earnbutton.gameObject.SetActive(true);
         UpdateTurn();
@@ -55,6 +53,8 @@ public class MainGameScene : MonoBehaviour
         if(DiceManager.Instance.CalculateScore() == 0)
         {
             //Farkle!!
+            audioSource.PlayOneShot(audioclip1);
+            DiceManager.Instance.AllRoll();
             saveScore.text = "0";
             farkle.gameObject.SetActive(true);
             Invoke("HideFarkle", 1f);
@@ -66,6 +66,7 @@ public class MainGameScene : MonoBehaviour
         }
         else
         {
+            
             saveScore.text = (Convert.ToInt32(saveScore.text) + DiceManager.Instance.CalculateScore()).ToString();
             for(int i =0; i< DiceManager.Instance.selectedDice.Count; i++)
             {
@@ -73,17 +74,22 @@ public class MainGameScene : MonoBehaviour
             }
             if (!DiceManager.Instance.IsSomethingActive())
             {
+                audioSource.PlayOneShot(audioclip2);
                 DiceManager.Instance.AllActive();
-                for(int j = 0; j < 6; j++)
-                {
-                    DiceManager.Instance.dice[j].Roll();
-                }
+                DiceManager.Instance.AllRoll();
                 Debug.Log("전부 다시 활성화!");
+                DiceManager.Instance.SetScore(0);
+                DiceManager.Instance.InitDice();
+                rollbutton.gameObject.SetActive(false);
+                stopbutton.gameObject.SetActive(true);
             }
-            DiceManager.Instance.SetScore(0);
-            DiceManager.Instance.InitDice();
-            rollbutton.gameObject.SetActive(true);
-            stopbutton.gameObject.SetActive(true);
+            else
+            {
+                DiceManager.Instance.SetScore(0);
+                DiceManager.Instance.InitDice();
+                rollbutton.gameObject.SetActive(true);
+                stopbutton.gameObject.SetActive(true);
+            }
         }
 
         

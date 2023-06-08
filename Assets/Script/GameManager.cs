@@ -21,11 +21,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        turn = 1;
     }
     // Start is called before the first frame update
     void Start()
     {
-        turn = 1;
+        
     }
 
     public void SetPlayerName(string player_name)
