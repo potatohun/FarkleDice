@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class DiceManager : MonoBehaviour
 {
-    public static GameManager Instance {  get; private set; }
-    private string player_name;
-
+    public static DiceManager Instance { get; private set; }
+    public Dice[] dice;
 
     private void Awake()
     {
@@ -20,26 +18,22 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
     // Start is called before the first frame update
     void Start()
     {
-
+        dice = new Dice[6];
+        for (int i = 0; i < 6; i++)
+        {
+            // Dice 오브젝트를 찾아서 배열에 할당
+            dice[i] = transform.GetChild(i).GetComponent<Dice>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void SetPlayerName(string player_name)
-    {
-        this.player_name = player_name;
-    }
-
-    public string GetPlayerName()
-    {
-        return this.player_name;
     }
 }
